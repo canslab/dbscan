@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace clustering
 {
     class JCluster : IComparable<JCluster>
     {
-        public static int clusterIndex = 0;
-
+        /************************************************/
+        /*****          Constructor                 *****/
+        /************************************************/
         public JCluster()
         {
             PointList = new List<JPoint>();
         }
-        
+
+        /************************************************/
+        /*****          Public  Method              *****/
+        /************************************************/
         public void AddPoint(JPoint point)
         {
             PointList.Add(point);
             point.SetParent(this);
         }
 
-        // this < other ==> -1
-        // this = other ==> 0
-        // this > other ==> 1
+        /*************************************************/
+        /***********    Interface Implemenation **********/
+        /*************************************************/
         public int CompareTo(JCluster other)
         {
             if (Count > other.Count)
@@ -42,6 +43,9 @@ namespace clustering
             }
         }
 
+        /*************************************************/
+        /***********    Properties              **********/
+        /*************************************************/
         public KeyValuePair<double, double> Representative
         {
             get
@@ -58,7 +62,6 @@ namespace clustering
                 return new KeyValuePair<double, double>(x, y);
             }
         }
-
         public int Count
         {
             get { return PointList.Count; }

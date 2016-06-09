@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace clustering
 {
@@ -18,8 +15,11 @@ namespace clustering
             mNeighborhood = new List<JPoint>();
             ParentExist = false;
             Parent = null;
-            IsOutlier = false;
         }
+
+        /*******************************************/
+        /*****      PUBLIC METHOD               ****/
+        /*******************************************/
         public List<JPoint> GetNeighborPoints(double epsilon, List<JPoint> wholePoints)
         {
             if(wholePoints == null)
@@ -58,6 +58,14 @@ namespace clustering
                 ParentExist = false;
             }
         }
+        public void DeleteMetaData()
+        {
+            Visited = false;
+            NeighborCalculated = false;
+            Parent = null;
+            ParentExist = false;
+            mNeighborhood.Clear();
+        }
 
         /*******************************************/
         /****           Properties               ***/
@@ -66,7 +74,6 @@ namespace clustering
         public double X { get;  }
         public double Y { get;  }
         public bool Visited { get; set; }
-        public bool IsOutlier { get; set; }
         public bool NeighborCalculated { get; private set; }
         public bool ParentExist { get; private set; }
         public JCluster Parent { get; private set; }
@@ -75,5 +82,20 @@ namespace clustering
         /*******        Private member var.         */
         /********************************************/
         private List<JPoint> mNeighborhood ;
+
+        /*********************************************/
+        /******     Static Method               ******/
+        /*********************************************/
+        public static double GetDistance(JPoint pt1, JPoint pt2)
+        {
+            double retValue = -1;
+
+            if (pt1 != null && pt2 != null)
+            {
+                retValue = Math.Sqrt(Math.Pow(pt1.X - pt2.X, 2) + Math.Pow(pt1.Y - pt2.Y, 2));
+            }
+
+            return retValue;
+        }
     }
 }

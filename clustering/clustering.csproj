@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JCluster.cs" />
+    <Compile Include="JClusteringAlgorithm.cs" />
     <Compile Include="JPoint.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
